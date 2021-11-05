@@ -8,6 +8,11 @@ const todoSlice = createSlice({
             id: 1,
             title: 'Wake up!',
             completed: false
+        },
+        {
+            id: 2,
+            title: 'Sleep!',
+            completed: true
         }
     ],
     reducers: {
@@ -18,13 +23,21 @@ const todoSlice = createSlice({
                 completed: false
             };
             state.push(newTodo);
-
+        },
+        completeTodo: (state, action) => {
+            const index = (element) => element.id == action.payload.id;
+            const indexToUpdate = state.findIndex(index);
+            state[indexToUpdate].completed = true;
         }
     }
 });
 
 export const {
-    addTodo
+    addTodo,
+    completeTodo
 } = todoSlice.actions;
+
+export const todoList = state => state.todos;
+
 
 export default todoSlice.reducer

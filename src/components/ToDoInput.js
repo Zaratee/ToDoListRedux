@@ -1,19 +1,28 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquare } from '@fortawesome/free-regular-svg-icons'
+import React, {useState} from 'react'
+import { addTodo } from '../redux/todoSlice';
+import { useDispatch} from 'react-redux'
+function ToDoInput(props) {
 
-function ToDoInput() {
+    const [value, setValue] = useState('');
+    const dispatch = useDispatch();
+    
+     const onSubmit = (event) => {
+        event.preventDefault();
+        if(value.trim() == '') return;
+        dispatch(addTodo({
+            title: value,
+        }))
+        setValue('');
+    }
+
+
     return (
-        <div className="input-container">
+        <form className="input-container" onSubmit={onSubmit}>
             <div className="input">
-                <div>
-                    <input></input>
-                </div>
-                <div>
-                    <div className="success-button"> Send</div>
-                </div>
+                    <input onChange={e => setValue(e.target.value)} value={value} ></input>
+                    <button type="submit" className="success-button noselect">Send</button>
             </div>
-        </div>
+        </form>
     )
 }
 
