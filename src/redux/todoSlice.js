@@ -9,11 +9,6 @@ const todoSlice = createSlice({
             title: 'Wake up!',
             completed: false
         },
-        {
-            id: 2,
-            title: 'Sleep!',
-            completed: true
-        }
     ],
     reducers: {
         addTodo: (state, action) => {
